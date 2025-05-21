@@ -1,6 +1,6 @@
 resource "github_repository" "ansible-crc" {
   name                 = "ansible-crc"
-  description          = "Ansible role to deploy OpenShift Local (CRC) with a domain name and network access."
+  description          = "Ansible role to deploy OpenShift Local (CRC) with a custom domain name and external API access."
   homepage_url         = "https://makeitwork.cloud"
   has_downloads        = true
   has_issues           = true
