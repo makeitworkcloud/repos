@@ -48,6 +48,52 @@ resource "github_repository_topics" "cluster" {
   depends_on = [github_repository.cluster]
 }
 
+resource "github_repository" "onion" {
+  name                 = "onion"
+  description          = "Static website pushed to S3 via GitHub Actions."
+  homepage_url         = "https://onion.makeitwork.cloud"
+  has_downloads        = true
+  has_issues           = true
+  has_projects         = true
+  has_wiki             = true
+  vulnerability_alerts = true
+}
+
+resource "github_repository_topics" "onion" {
+  repository = github_repository.onion.name
+  topics     = ["html", "tor", "onion", "github-actions", "s3"]
+  depends_on = [github_repository.onion]
+}
+
+resource "github_actions_secret" "onion_s3_bucket" {
+  repository      = github_repository.onion.name
+  secret_name     = "AWS_S3_BUCKET"
+  plaintext_value = data.sops_file.secret_vars.data["onion_s3_bucket"]
+  depends_on      = [github_repository.onion]
+}
+
+resource "github_actions_secret" "onion_aws_region" {
+  repository      = github_repository.onion.name
+  secret_name     = "AWS_REGION"
+  plaintext_value = data.sops_file.secret_vars.data["onion_aws_region"]
+  depends_on      = [github_repository.onion]
+}
+
+resource "github_actions_secret" "onion_access_key_id" {
+  repository      = github_repository.onion.name
+  secret_name     = "AWS_ACCESS_KEY_ID"
+  plaintext_value = data.sops_file.secret_vars.data["onion_aws_access_key_id"]
+  depends_on      = [github_repository.onion]
+}
+
+resource "github_actions_secret" "onion_secret_access_key" {
+  repository      = github_repository.onion.name
+  secret_name     = "AWS_SECRET_ACCESS_KEY"
+  plaintext_value = data.sops_file.secret_vars.data["onion_aws_secret_access_key"]
+  depends_on      = [github_repository.onion]
+}
+
+
 resource "github_repository" "repos" {
   name                 = "repos"
   description          = "Terraform management of GitHub repositories."
@@ -103,22 +149,26 @@ resource "github_actions_secret" "www_s3_bucket" {
   repository      = github_repository.www.name
   secret_name     = "AWS_S3_BUCKET"
   plaintext_value = data.sops_file.secret_vars.data["www_s3_bucket"]
+  depends_on      = [github_repository.www]
 }
 
 resource "github_actions_secret" "www_aws_region" {
   repository      = github_repository.www.name
   secret_name     = "AWS_REGION"
   plaintext_value = data.sops_file.secret_vars.data["www_aws_region"]
+  depends_on      = [github_repository.www]
 }
 
 resource "github_actions_secret" "www_access_key_id" {
   repository      = github_repository.www.name
   secret_name     = "AWS_ACCESS_KEY_ID"
   plaintext_value = data.sops_file.secret_vars.data["www_aws_access_key_id"]
+  depends_on      = [github_repository.www]
 }
 
 resource "github_actions_secret" "www_secret_access_key" {
   repository      = github_repository.www.name
   secret_name     = "AWS_SECRET_ACCESS_KEY"
   plaintext_value = data.sops_file.secret_vars.data["www_aws_secret_access_key"]
+  depends_on      = [github_repository.www]
 }
