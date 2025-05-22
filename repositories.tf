@@ -15,6 +15,22 @@ resource "github_repository_topics" "ansible-crc" {
   depends_on = [github_repository.ansible-crc]
 }
 
+resource "github_repository" "cflan" {
+  name                 = "cflan"
+  description          = "Python scripts for updating Cloudflare DNS entries via NetworkManager-dispatcher."
+  homepage_url         = "https://makeitwork.cloud"
+  has_downloads        = true
+  has_issues           = true
+  has_projects         = true
+  has_wiki             = true
+  vulnerability_alerts = true
+}
+
+resource "github_repository_topics" "cflan" {
+  repository = github_repository.cflan.name
+  topics     = ["python", "cloudflare", "networkmanager", "dns", "networking"]
+  depends_on = [github_repository.cluster]
+}
 resource "github_repository" "cluster" {
   name                 = "cluster"
   description          = "Terraform & Argo CD management of OpenShift cluster."

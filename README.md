@@ -26,11 +26,13 @@ No modules.
 | [github_actions_secret.www_secret_access_key](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/actions_secret) | resource |
 | [github_membership.admin](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/membership) | resource |
 | [github_repository.ansible-crc](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
+| [github_repository.cflan](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
 | [github_repository.cluster](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
 | [github_repository.repos](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
 | [github_repository.shelldefaults](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
 | [github_repository.www](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository) | resource |
 | [github_repository_topics.ansible-crc](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
+| [github_repository_topics.cflan](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_repository_topics.cluster](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_repository_topics.repos](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_repository_topics.shelldefaults](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
