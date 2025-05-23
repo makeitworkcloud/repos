@@ -128,6 +128,23 @@ resource "github_repository_topics" "shelldefaults" {
   depends_on = [github_repository.shelldefaults]
 }
 
+resource "github_repository" "torwww" {
+  name                 = "torwww"
+  description          = "Deploy web mirror on local Fedora system using Ansible."
+  homepage_url         = "https://makeitwork.cloud"
+  has_downloads        = true
+  has_issues           = true
+  has_projects         = true
+  has_wiki             = true
+  vulnerability_alerts = true
+}
+
+resource "github_repository_topics" "torwww" {
+  repository = github_repository.torwww.name
+  topics     = ["ansible"]
+  depends_on = [github_repository.torwww]
+}
+
 resource "github_repository" "www" {
   name                 = "www"
   description          = "Static website pushed to S3 via GitHub Actions."
