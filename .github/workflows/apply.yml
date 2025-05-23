@@ -1,0 +1,26 @@
+---
+# https://github.com/marketplace/actions/setup-cloudflared
+#
+name: Apply - Terraform via Cloudflared
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: hashicorp/setup-terraform@v3
+      - name: Setup cloudflared
+        uses: AnimMouse/setup-cloudflared@v2
+      - name: Setup cloudflared tunnel
+        uses: AnimMouse/setup-cloudflared/tunnel@v2
+        with:
+          cloudflare_tunnel_credential: ${{ secrets.CLOUDFLARE_TUNNEL_CREDENTIAL }}
+          cloudflare_tunnel_configuration: ${{ secrets.CLOUDFLARE_TUNNEL_CONFIGURATION }}
+          cloudflare_tunnel_id: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
+
+      - name: Connectivity test
+        run: |
+          curl -k https://api.makeitwork.cloud:6443

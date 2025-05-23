@@ -111,6 +111,27 @@ resource "github_repository_topics" "repos" {
   depends_on = [github_repository.repos]
 }
 
+resource "github_actions_secret" "repos_cf_tunnel_cred" {
+  repository      = github_repository.repos.name
+  secret_name     = "CLOUDFLARE_TUNNEL_CREDENTIAL"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_tunnel_credential"]
+  depends_on      = [github_repository.repos]
+}
+
+resource "github_actions_secret" "repos_cf_tunnel_config" {
+  repository      = github_repository.repos.name
+  secret_name     = "CLOUDFLARE_TUNNEL_CONFIG"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_tunnel_configuration"]
+  depends_on      = [github_repository.repos]
+}
+
+resource "github_actions_secret" "repos_cf_tunnel_id" {
+  repository      = github_repository.repos.name
+  secret_name     = "CLOUDFLARE_TUNNEL_ID"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_tunnel_id"]
+  depends_on      = [github_repository.repos]
+}
+
 resource "github_repository" "shelldefaults" {
   name                 = "shelldefaults"
   description          = "Setup shell defaults"
