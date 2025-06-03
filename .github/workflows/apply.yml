@@ -26,7 +26,7 @@ jobs:
           chmod +x /usr/local/bin/terraform-docs
           python3 -m pip install --upgrade checkov
           curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
-          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+          curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
       - uses: oHTGo/setup-cloudflare-warp-action@master
         with:
           organization: makeitworkcloud
