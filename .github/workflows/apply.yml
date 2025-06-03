@@ -36,6 +36,6 @@ jobs:
           insecure_skip_tls_verify: true
 
       - run: |
-          make init
+          make test
       - run: |
           make plan
