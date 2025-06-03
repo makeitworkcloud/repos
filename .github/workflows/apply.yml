@@ -19,6 +19,7 @@ jobs:
       - uses: nhedger/setup-sops@v2
       - uses: hashicorp/setup-terraform@v3
       - uses: redhat-actions/oc-installer@v1
+      - uses: pre-commit/action@v3.0.1
       - uses: oHTGo/setup-cloudflare-warp-action@master
         with:
           organization: makeitworkcloud
