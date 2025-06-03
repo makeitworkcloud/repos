@@ -16,10 +16,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - uses: nhedger/setup-sops@v2
-      - uses: hashicorp/setup-terraform@v3
-      - uses: redhat-actions/oc-installer@v1
-      - run: |
+      - name: Install SOPS
+        uses: nhedger/setup-sops@v2
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v3
+      - name: Install OpenShift CLI
+        uses: redhat-actions/oc-installer@v1
+      - name: Install pre-commit & dependencies
+        run: |
           python3 -m pip install --upgrade pre-commit
           curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.20.0/terraform-docs-v0.20.0-$(uname)-amd64.tar.gz
           tar -xzf terraform-docs.tar.gz -C /usr/local/bin
@@ -27,20 +31,22 @@ jobs:
           python3 -m pip install --upgrade checkov
           curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
           curl -s https://raw.githubusercontent.com/aquasecurity/tfsec/master/scripts/install_linux.sh | bash
-      - uses: oHTGo/setup-cloudflare-warp-action@master
+      - name: Install & connect to WARP
+        uses: oHTGo/setup-cloudflare-warp-action@master
         with:
           organization: makeitworkcloud
           auth-client-id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
           auth-client-secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
-      - uses: redhat-actions/oc-login@v1
+      - name: Login to OpenShift
+        uses: redhat-actions/oc-login@v1
         with:
           openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
           openshift_username: ${{ secrets.OPENSHIFT_USERNAME }}
           openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
           insecure_skip_tls_verify: true
 
-      - name: terraform test
+      - name: Run tests
         run: make test
-      - name: terraform plan
+      - name: Terraform plan
         run: make plan
