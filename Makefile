@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 OPENSHIFT := $(shell which oc)
 TERRAFORM := $(shell which terraform)
 OPENSHIFT_API_URL := $(shell sops decrypt secrets/secrets.yaml | grep cluster_host | cut -d ' ' -f 2)

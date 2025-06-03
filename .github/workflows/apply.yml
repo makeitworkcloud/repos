@@ -34,7 +34,5 @@ jobs:
 
       - name: terraform test
         run: make test
-        shell: bash
       - name: terraform plan
         run: make plan
-        shell: bash
