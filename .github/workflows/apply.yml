@@ -25,3 +25,8 @@ jobs:
           openshift_username: ${{ secrets.OPENSHIFT_USERNAME }}
           openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
           insecure_skip_tls_verify: true
+
+      - run: |
+          make init
+      - run: |
+          make plan
