@@ -146,6 +146,13 @@ resource "github_actions_secret" "openshift_password" {
   depends_on      = [github_repository.repos]
 }
 
+resource "github_actions_secret" "sops_age_key" {
+  repository      = github_repository.repos.name
+  secret_name     = "SOPS_AGE_KEY"
+  plaintext_value = data.sops_file.secret_vars.data["sops_age_key"]
+  depends_on      = [github_repository.repos]
+}
+
 resource "github_repository" "shelldefaults" {
   name                 = "shelldefaults"
   description          = "Setup shell defaults"
