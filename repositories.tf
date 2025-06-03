@@ -170,6 +170,23 @@ resource "github_repository_topics" "shelldefaults" {
   depends_on = [github_repository.shelldefaults]
 }
 
+resource "github_repository" "terraform-runner" {
+  name                 = "terraform-runner"
+  description          = "Terraform Runner for GitHub Actions."
+  homepage_url         = "https://makeitwork.cloud"
+  has_downloads        = true
+  has_issues           = true
+  has_projects         = true
+  has_wiki             = true
+  vulnerability_alerts = true
+}
+
+resource "github_repository_topics" "terraform-runner" {
+  repository = github_repository.terraform-runner.name
+  topics     = ["docker", "terraform", "github-actions", "runner"]
+  depends_on = [github_repository.terraform-runner]
+}
+
 resource "github_repository" "torwww" {
   name                 = "torwww"
   description          = "Deploy web mirror on local Fedora system using Ansible."
