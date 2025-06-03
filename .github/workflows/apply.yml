@@ -33,6 +33,6 @@ jobs:
           insecure_skip_tls_verify: true
 
       - run: make init
-        shell: bash
+        shell: /bin/bash
       - run: make plan
-        shell: bash
+        shell: /bin/bash
