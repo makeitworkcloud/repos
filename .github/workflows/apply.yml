@@ -32,5 +32,7 @@ jobs:
           openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
           insecure_skip_tls_verify: true
 
-      - run: bash make init
-      - run: bash make plan
+      - run: make init
+        shell: bash
+      - run: make plan
+        shell: bash
