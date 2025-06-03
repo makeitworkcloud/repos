@@ -19,7 +19,14 @@ jobs:
       - uses: nhedger/setup-sops@v2
       - uses: hashicorp/setup-terraform@v3
       - uses: redhat-actions/oc-installer@v1
-      - uses: pre-commit/action@v3.0.1
+      - run: |
+          python3 -m pip install --upgrade pre-commit
+          curl -sSLo ./terraform-docs.tar.gz https://terraform-docs.io/dl/v0.20.0/terraform-docs-v0.20.0-$(uname)-amd64.tar.gz
+          tar -xzf terraform-docs.tar.gz -C /usr/local/bin
+          chmod +x /usr/local/bin/terraform-docs
+          python3 -m pip install --upgrade checkov
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
       - uses: oHTGo/setup-cloudflare-warp-action@master
         with:
           organization: makeitworkcloud
