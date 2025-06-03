@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: hashicorp/setup-terraform@v3
-      - uses: Boostport/setup-cloudflare-warp@v1
+      - uses: oHTGo/setup-cloudflare-warp-action@master
         with:
           organization: makeitworkcloud
           auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
