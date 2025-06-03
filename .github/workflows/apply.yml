@@ -12,12 +12,16 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: hashicorp/setup-terraform@v3
+      - uses: redhat-actions/oc-installer@v1
       - uses: oHTGo/setup-cloudflare-warp-action@master
         with:
           organization: makeitworkcloud
           auth-client-id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
           auth-client-secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
-      - name: Connectivity test
-        run: |
-          curl -k https://api.makeitwork.cloud:6443
+      - uses: redhat-actions/oc-login@v1
+        with:
+          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
+          openshift_username: ${{ secrets.OPENSHIFT_USERNAME }}
+          openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
+          insecure_skip_tls_verify: true

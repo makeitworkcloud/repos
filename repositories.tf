@@ -125,6 +125,27 @@ resource "github_actions_secret" "cloudflare_auth_client_secret" {
   depends_on      = [github_repository.repos]
 }
 
+resource "github_actions_secret" "openshift_server_url" {
+  repository      = github_repository.repos.name
+  secret_name     = "OPENSHIFT_SERVER_URL"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_server_url"]
+  depends_on      = [github_repository.repos]
+}
+
+resource "github_actions_secret" "openshift_username" {
+  repository      = github_repository.repos.name
+  secret_name     = "OPENSHIFT_USERNAME"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_username"]
+  depends_on      = [github_repository.repos]
+}
+
+resource "github_actions_secret" "openshift_password" {
+  repository      = github_repository.repos.name
+  secret_name     = "OPENSHIFT_PASSWORD"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_password"]
+  depends_on      = [github_repository.repos]
+}
+
 resource "github_repository" "shelldefaults" {
   name                 = "shelldefaults"
   description          = "Setup shell defaults"
