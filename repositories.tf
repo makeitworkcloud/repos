@@ -111,24 +111,17 @@ resource "github_repository_topics" "repos" {
   depends_on = [github_repository.repos]
 }
 
-resource "github_actions_secret" "repos_cf_tunnel_cred" {
+resource "github_actions_secret" "cloudflare_auth_client_id" {
   repository      = github_repository.repos.name
-  secret_name     = "CLOUDFLARE_TUNNEL_CREDENTIAL"
-  plaintext_value = data.sops_file.secret_vars.data["cloudflare_tunnel_credential"]
+  secret_name     = "CLOUDFLARE_AUTH_CLIENT_ID"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_auth_client_id"]
   depends_on      = [github_repository.repos]
 }
 
-resource "github_actions_secret" "repos_cf_tunnel_config" {
+resource "github_actions_secret" "cloudflare_auth_client_secret" {
   repository      = github_repository.repos.name
-  secret_name     = "CLOUDFLARE_TUNNEL_CONFIG"
-  plaintext_value = data.sops_file.secret_vars.data["cloudflare_tunnel_configuration"]
-  depends_on      = [github_repository.repos]
-}
-
-resource "github_actions_secret" "repos_cf_tunnel_id" {
-  repository      = github_repository.repos.name
-  secret_name     = "CLOUDFLARE_TUNNEL_ID"
-  plaintext_value = data.sops_file.secret_vars.data["cloudflare_tunnel_id"]
+  secret_name     = "CLOUDFLARE_AUTH_CLIENT_SECRET"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_auth_client_secret"]
   depends_on      = [github_repository.repos]
 }
 

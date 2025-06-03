@@ -12,14 +12,11 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - uses: hashicorp/setup-terraform@v3
-      - name: Setup cloudflared
-        uses: AnimMouse/setup-cloudflared@v2
-      - name: Setup cloudflared tunnel
-        uses: AnimMouse/setup-cloudflared/tunnel@v2
+      - uses: Boostport/setup-cloudflare-warp@v1
         with:
-          cloudflare_tunnel_credential: ${{ secrets.CLOUDFLARE_TUNNEL_CREDENTIAL }}
-          cloudflare_tunnel_configuration: ${{ secrets.CLOUDFLARE_TUNNEL_CONFIGURATION }}
-          cloudflare_tunnel_id: ${{ secrets.CLOUDFLARE_TUNNEL_ID }}
+          organization: makeitworkcloud
+          auth_client_id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
+          auth_client_secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
       - name: Connectivity test
         run: |
