@@ -32,7 +32,9 @@ jobs:
           openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
           insecure_skip_tls_verify: true
 
-      - run: make init
-        shell: /bin/bash
-      - run: make plan
-        shell: /bin/bash
+      - name: terraform test
+        run: make test
+        shell: bash
+      - name: terraform plan
+        run: make plan
+        shell: bash
