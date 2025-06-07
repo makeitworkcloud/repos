@@ -20,6 +20,10 @@ jobs:
         uses: nhedger/setup-sops@v2
       - name: Install OpenTofu
         uses: opentofu/setup-opentofu@v1
+
+      - name: Terraform alias
+        run: |
+          ln -s $(which tofu) /usr/local/bin/terraform
       - name: Install OpenShift CLI
         uses: redhat-actions/oc-installer@v1
       - name: Install pre-commit & dependencies
