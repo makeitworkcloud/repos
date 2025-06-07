@@ -4,8 +4,8 @@
 name: Plan - Terraform via Cloudflared
 
 on:
-  pull_request_review:
-    types: [submitted, edited]
+  pull_request:
+    types: [opened, edited]
 
 env:
   SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
