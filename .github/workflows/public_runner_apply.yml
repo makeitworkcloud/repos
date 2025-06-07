@@ -1,7 +1,5 @@
 ---
-# https://github.com/marketplace/actions/setup-cloudflared
-#
-name: Apply - Terraform via Cloudflared
+name: Apply - Terraform via WARP
 on:
   push:
     branches:

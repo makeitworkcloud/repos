@@ -1,17 +1,17 @@
 ---
-# https://github.com/marketplace/actions/setup-cloudflared
-#
-name: Plan - Terraform via Cloudflared
+name: Plan - Terraform via WARP
 
 on:
   pull_request:
-    types: [opened, edited]
+    types: [opened, reopened]
+  push:
+  workflow_dispatch:
 
 env:
   SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
 
 jobs:
-  deploy:
+  plan:
     runs-on: ubuntu-latest
 
     steps:
