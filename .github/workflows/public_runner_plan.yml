@@ -5,7 +5,8 @@ name: Plan - Terraform via Cloudflared
 
 on:
   pull_request:
-    types: [opened, edited]
+    types: [opened, edited, reopened]
+  workflow_dispatch:
 
 env:
   SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
