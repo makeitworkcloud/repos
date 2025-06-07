@@ -3,8 +3,7 @@ name: Plan - Terraform via WARP
 
 on:
   pull_request:
-    types: [opened, reopened]
-  push:
+    types: [opened, reopened, synchronize]
   workflow_dispatch:
 
 env:
