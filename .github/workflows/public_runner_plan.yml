@@ -1,7 +1,5 @@
 ---
-# https://github.com/marketplace/actions/setup-cloudflared
-#
-name: Plan - Terraform via Cloudflared
+name: Plan - Terraform via WARP
 
 on:
   pull_request:
