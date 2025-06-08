@@ -18,29 +18,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@master
-      - name: Connect to WARP
-        run: |
-          mkdir -p /var/lib/cloudflare-warp
-          echo '<dict>' >/var/lib/cloudflare-warp/mdm.xml
-          echo '  <key>organization</key>' >>/var/lib/cloudflare-warp/mdm.xml
-          echo '  <string>makeitworkcloud</string>' >>/var/lib/cloudflare-warp/mdm.xml
-          echo '  <key>auth_client_id</key>' >>/var/lib/cloudflare-warp/mdm.xml
-          echo '  <string>${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}</string>' >>/var/lib/cloudflare-warp/mdm.xml
-          echo '  <key>auth_client_secret</key>' >>/var/lib/cloudflare-warp/mdm.xml
-          echo '  <string>${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}</string>' >>/var/lib/cloudflare-warp/mdm.xml
-          echo '</dict>' >>/var/lib/cloudflare-warp/mdm.xml
-          systemctl start warp-svc
-          while true
-          do
-            warp-cli --accept-tos settings | grep 'Organization: makeitworkcloud' && break || echo "Waiting for WARP registration..."
-            sleep 1
-          done
-          warp-cli --accept-tos connect
-          while true
-          do
-            warp-cli --accept-tos status | grep 'Connected' && break || echo "Waiting for WARP connection..."
-            sleep 1
-          done
+      - name: Install & connect to WARP
+        uses: oHTGo/setup-cloudflare-warp-action@master
+        with:
+          organization: makeitworkcloud
+          auth-client-id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
+          auth-client-secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
       - name: Login to OpenShift
         uses: redhat-actions/oc-login@v1
