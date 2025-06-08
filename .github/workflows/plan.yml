@@ -14,7 +14,7 @@ jobs:
     runs-on: arc
     container:
       image: image-registry.openshift-image-registry.svc.cluster.local:5000/terraform-runner:latest
-      options: --insecure-skip-tls-verify
+      options: --tls-verify=false
 
     steps:
       - uses: actions/checkout@master
