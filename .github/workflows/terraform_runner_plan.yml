@@ -1,0 +1,37 @@
+---
+name: Plan - Terraform via WARP
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+  workflow_dispatch:
+
+env:
+  SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    container: ghcr.io/makeitworkcloud/terraform-runner:latest
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Install & connect to WARP
+        uses: oHTGo/setup-cloudflare-warp-action@master
+        with:
+          organization: makeitworkcloud
+          auth-client-id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
+          auth-client-secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
+
+      - name: Login to OpenShift
+        uses: redhat-actions/oc-login@v1
+        with:
+          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
+          openshift_username: ${{ secrets.OPENSHIFT_USERNAME }}
+          openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
+          insecure_skip_tls_verify: true
+
+      - name: Run tests
+        run: make test
+      - name: Terraform plan
+        run: make plan
