@@ -12,9 +12,7 @@ env:
 jobs:
   plan:
     runs-on: arc
-    container:
-      image: image-registry.openshift-image-registry.svc.cluster.local:5000/terraform-runner:latest
-      options: --tls-verify=false
+    container: image-registry.openshift-image-registry.svc.cluster.local:5000/terraform-runner:latest
 
     steps:
       - uses: actions/checkout@master
