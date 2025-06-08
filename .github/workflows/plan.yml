@@ -13,7 +13,7 @@ jobs:
   plan:
     runs-on: arc
     container:
-      image: ghcr.io/makeitworkcloud/terraform-runner:latest
+      image: image-registry.openshift-image-registry.svc.cluster.local:5000/terraform-runner:latest
 
     steps:
       - uses: actions/checkout@master
