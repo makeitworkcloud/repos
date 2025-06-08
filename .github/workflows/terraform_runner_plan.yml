@@ -27,15 +27,17 @@ jobs:
           echo '  <key>auth_client_secret</key>' >>/var/lib/cloudflare-warp/mdm.xml
           echo '  <string>${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}</string>' >>/var/lib/cloudflare-warp/mdm.xml
           echo '</dict>' >>/var/lib/cloudflare-warp/mdm.xml
+          systemctl start warp-svc
           while true
           do
             warp-cli --accept-tos settings | grep 'Organization: makeitworkcloud' && break || echo "Waiting for WARP registration..."
+            sleep 1
           done
+          warp-cli --accept-tos connect
           while true
           do
-            warp-cli --accept-tos connect
             warp-cli --accept-tos status | grep 'Connected' && break || echo "Waiting for WARP connection..."
-            sleep 5
+            sleep 1
           done
 
       - name: Login to OpenShift
