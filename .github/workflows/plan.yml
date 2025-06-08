@@ -1,5 +1,5 @@
 ---
-name: Plan - Terraform via WARP
+name: Plan - Terraform via ARC
 
 on:
   pull_request:
@@ -11,19 +11,12 @@ env:
 
 jobs:
   plan:
-    runs-on: ubuntu-latest
+    runs-on: arc
     container:
       image: ghcr.io/makeitworkcloud/terraform-runner:latest
-      options: --privileged
 
     steps:
       - uses: actions/checkout@master
-      - name: Install & connect to WARP
-        uses: oHTGo/setup-cloudflare-warp-action@master
-        with:
-          organization: makeitworkcloud
-          auth-client-id: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_ID }}
-          auth-client-secret: ${{ secrets.CLOUDFLARE_AUTH_CLIENT_SECRET }}
 
       - name: Login to OpenShift
         uses: redhat-actions/oc-login@v1
