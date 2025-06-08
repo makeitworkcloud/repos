@@ -12,7 +12,9 @@ env:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    container: ghcr.io/makeitworkcloud/terraform-runner:latest
+    container:
+      image: ghcr.io/makeitworkcloud/terraform-runner:latest
+      options: --privileged
 
     steps:
       - uses: actions/checkout@master
