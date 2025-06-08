@@ -13,7 +13,7 @@ jobs:
   plan:
     runs-on: arc
     container:
-      image: image-registry.openshift-image-registry.svc:5000/arc-runners/terraform-runner:latest
+      image: 10.217.5.181:5000/arc-runners/terraform-runner:latest
       credentials:
         username: ${{ secrets.OPENSHIFT_USERNAME }}
         password: ${{ secrets.OPENSHIFT_PASSWORD }}
