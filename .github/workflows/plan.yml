@@ -15,7 +15,9 @@ jobs:
     container: image-registry.openshift-image-registry.svc:5000/arc-runners/terraform-runner:latest
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v4
+
+      - run: git init
 
       - name: Login to OpenShift
         uses: redhat-actions/oc-login@v1
