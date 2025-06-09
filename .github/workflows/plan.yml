@@ -13,7 +13,7 @@ jobs:
   plan:
     runs-on: arc
     container:
-      image: default-route-openshift-image-registry.apps.makeitwork.cloud:5000/arc-runners/terraform-runner:latest
+      image: default-route-openshift-image-registry.apps.makeitwork.cloud/arc-runners/terraform-runner:latest
       credentials:
         username: "doesnotmatter"
         password: ${{ secrets.OPENSHIFT_TOKEN }}
