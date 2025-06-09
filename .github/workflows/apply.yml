@@ -12,7 +12,7 @@ jobs:
   deploy:
     runs-on: arc
     container:
-      image: image-registry.openshift-image-registry.svc.cluster.local:5000/arc-runners/terraform-runner:latest
+      image: image-registry.openshift-image-registry.svc:5000/arc-runners/terraform-runner:latest
 
     steps:
       - uses: actions/checkout@master
