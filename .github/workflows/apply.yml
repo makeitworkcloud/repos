@@ -11,8 +11,7 @@ env:
 jobs:
   deploy:
     runs-on: arc
-    container:
-      image: default-route-openshift-image-registry.apps.makeitwork.cloud/arc-runners/terraform-runner
+    container: default-route-openshift-image-registry.apps.makeitwork.cloud/arc-runners/terraform-runner
 
     steps:
       - uses: actions/checkout@master
