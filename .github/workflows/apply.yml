@@ -13,9 +13,6 @@ jobs:
     runs-on: arc
     container:
       image: image-registry.openshift-image-registry.svc:5000/arc-runners/terraform-runner:latest
-      credentials:
-        username: "doesnotmatter"
-        password: ${{ secrets.OPENSHIFT_TOKEN }}
 
     steps:
       - uses: actions/checkout@master

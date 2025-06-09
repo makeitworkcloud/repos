@@ -14,9 +14,6 @@ jobs:
     runs-on: arc
     container:
       image: default-route-openshift-image-registry.apps.makeitwork.cloud/arc-runners/terraform-runner
-      credentials:
-        username: "doesnotmatter"
-        password: ${{ secrets.OPENSHIFT_TOKEN }}
 
     steps:
       - uses: actions/checkout@master
