@@ -13,10 +13,10 @@ jobs:
   plan:
     runs-on: arc
     container:
-      image: default-route-openshift-image-registry.apps.makeitwork.cloud/arc-runners/terraform-runner:latest
+      image: image-registry.openshift-image-registry.svc:5000/arc-runners/terraform-runner:latest
       credentials:
-        username: ${{ secrets.OPENSHIFT_USERNAME }}
-        password: ${{ secrets.OPENSHIFT_PASSWORD }}
+        username: "doesnotmatter"
+        password: ${{ secrets.OPENSHIFT_TOKEN }}
 
     steps:
       - uses: actions/checkout@master
