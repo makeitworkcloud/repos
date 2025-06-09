@@ -1,0 +1,35 @@
+---
+name: Plan - Terraform via ARC
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+  workflow_dispatch:
+
+env:
+  SOPS_AGE_KEY: ${{ secrets.SOPS_AGE_KEY }}
+
+jobs:
+  plan:
+    runs-on: arc
+    container:
+      image: default-route-openshift-image-registry.apps.makeitwork.cloud/arc-runners/terraform-runner
+      credentials:
+        username: "doesnotmatter"
+        password: ${{ secrets.OPENSHIFT_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Login to OpenShift
+        uses: redhat-actions/oc-login@v1
+        with:
+          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
+          openshift_username: ${{ secrets.OPENSHIFT_USERNAME }}
+          openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
+          insecure_skip_tls_verify: true
+
+      - name: Run tests
+        run: make test
+      - name: Terraform plan
+        run: make plan
