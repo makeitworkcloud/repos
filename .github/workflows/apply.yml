@@ -11,7 +11,11 @@ env:
 jobs:
   deploy:
     runs-on: arc
-    container: image-registry.openshift-image-registry.svc.cluster.local:5000/terraform-runner:latest
+    container:
+      image: default-route-openshift-image-registry.apps.makeitwork.cloud/arc-runners/terraform-runner
+      credentials:
+        username: "doesnotmatter"
+        password: ${{ secrets.OPENSHIFT_TOKEN }}
 
     steps:
       - uses: actions/checkout@master
