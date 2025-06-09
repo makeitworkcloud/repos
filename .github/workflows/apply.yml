@@ -16,8 +16,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: git init
-
       - name: Login to OpenShift
         uses: redhat-actions/oc-login@v1
         with:
