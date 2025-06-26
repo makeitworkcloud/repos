@@ -1,7 +1,7 @@
-import {
+/*import {
   to = github_user_ssh_key.ssh_key
   id = "ssh_key"
-}
+}*/
 
 resource "github_user_ssh_key" "ssh_key" {
   title = "GitHub SSH Key"
