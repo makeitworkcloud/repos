@@ -8,11 +8,6 @@ resource "github_user_ssh_key" "ssh_key" {
   key   = data.sops_file.secret_vars.data["github_ssh_key"]
 }
 
-import {
-  to = github_user_gpg_key.gpg_key
-  id = "gpg_key"
-}
-
 resource "github_user_gpg_key" "gpg_key" {
   armored_public_key = data.sops_file.secret_vars.data["github_gpg_key"]
 }
