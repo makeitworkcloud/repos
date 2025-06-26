@@ -66,5 +66,5 @@ No inputs.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_id_ssh"></a> [id\_ssh](#output\_id\_ssh) | numeric id |
+| <a name="output_numeric_ssh_id"></a> [numeric\_ssh\_id](#output\_numeric\_ssh\_id) | SSH key numeric ID |
 <!-- END_TF_DOCS -->
