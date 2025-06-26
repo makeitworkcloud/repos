@@ -55,7 +55,6 @@ No modules.
 | [github_repository_topics.torwww](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_repository_topics.www](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_user_gpg_key.gpg_key](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_gpg_key) | resource |
-| [github_user_ssh_key.ssh_key](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/user_ssh_key) | resource |
 | [sops_file.secret_vars](https://registry.terraform.io/providers/carlpett/sops/latest/docs/data-sources/file) | data source |
 
 ## Inputs
@@ -64,7 +63,5 @@ No inputs.
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_numeric_ssh_id"></a> [numeric\_ssh\_id](#output\_numeric\_ssh\_id) | SSH key numeric ID |
+No outputs.
 <!-- END_TF_DOCS -->
