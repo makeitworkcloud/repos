@@ -17,7 +17,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: git config --global --add safe.directory '*'
+      - name: Disabling git safe directories, running as root
+        run: git config --global --add safe.directory '*'
 
       - name: Login to OpenShift
         uses: redhat-actions/oc-login@v1
