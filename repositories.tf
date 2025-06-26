@@ -1,3 +1,8 @@
+import {
+  to = github_repository.ansible-crc
+  id = "ansible-crc"
+}
+
 resource "github_repository" "ansible-crc" {
   name                 = "ansible-crc"
   description          = "Ansible role to deploy OpenShift Local (CRC) with a custom domain name and external API access."
@@ -13,6 +18,11 @@ resource "github_repository_topics" "ansible-crc" {
   repository = github_repository.ansible-crc.name
   topics     = ["ansible", "openshift", "crc", "kubernetes", "ansible-playbook", "ansible-role", "openshift-local"]
   depends_on = [github_repository.ansible-crc]
+}
+
+import {
+  to = github_repository.cflan
+  id = "cflan"
 }
 
 resource "github_repository" "cflan" {
@@ -31,6 +41,12 @@ resource "github_repository_topics" "cflan" {
   topics     = ["python", "cloudflare", "networkmanager", "dns", "networking"]
   depends_on = [github_repository.cluster]
 }
+
+import {
+  to = github_repository.cluster
+  id = "cluster"
+}
+
 resource "github_repository" "cluster" {
   name                 = "cluster"
   description          = "Terraform & Argo CD management of OpenShift cluster."
@@ -46,6 +62,11 @@ resource "github_repository_topics" "cluster" {
   repository = github_repository.cluster.name
   topics     = ["terraform", "openshift", "argocd", "kustomize", "kubernetes"]
   depends_on = [github_repository.cluster]
+}
+
+import {
+  to = github_repository.onion
+  id = "onion"
 }
 
 resource "github_repository" "onion" {
@@ -93,6 +114,10 @@ resource "github_actions_secret" "onion_secret_access_key" {
   depends_on      = [github_repository.onion]
 }
 
+import {
+  to = github_repository.repos
+  id = "repos"
+}
 
 resource "github_repository" "repos" {
   name                 = "repos"
@@ -160,6 +185,11 @@ resource "github_actions_secret" "sops_age_key" {
   depends_on      = [github_repository.repos]
 }
 
+import {
+  to = github_repository.shelldefaults
+  id = "shelldefaults"
+}
+
 resource "github_repository" "shelldefaults" {
   name                 = "shelldefaults"
   description          = "Setup shell defaults"
@@ -175,6 +205,11 @@ resource "github_repository_topics" "shelldefaults" {
   repository = github_repository.shelldefaults.name
   topics     = ["shell", "bash", "python", "bashrc"]
   depends_on = [github_repository.shelldefaults]
+}
+
+import {
+  to = github_repository.terraform-runner
+  id = "terraform-runner"
 }
 
 resource "github_repository" "terraform-runner" {
@@ -194,6 +229,11 @@ resource "github_repository_topics" "terraform-runner" {
   depends_on = [github_repository.terraform-runner]
 }
 
+import {
+  to = github_repository.torwww
+  id = "torwww"
+}
+
 resource "github_repository" "torwww" {
   name                 = "torwww"
   description          = "Deploy web mirror on local Fedora system using Ansible."
@@ -209,6 +249,11 @@ resource "github_repository_topics" "torwww" {
   repository = github_repository.torwww.name
   topics     = ["ansible"]
   depends_on = [github_repository.torwww]
+}
+
+import {
+  to = github_repository.www
+  id = "www"
 }
 
 resource "github_repository" "www" {
