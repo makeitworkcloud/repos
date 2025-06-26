@@ -24,6 +24,11 @@ jobs:
           openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
           insecure_skip_tls_verify: true
 
+      - name: Troubleshooting directory
+        run: |
+          pwd
+          ls -a
+
       - name: Run tests
         run: make test
       - name: Terraform plan
