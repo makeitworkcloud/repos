@@ -15,8 +15,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          set-safe-directory: '*'
+
+      - run: git config --global --add safe.directory *
 
       - name: Login to OpenShift
         uses: redhat-actions/oc-login@v1
@@ -27,7 +27,7 @@ jobs:
           insecure_skip_tls_verify: true
 
       - name: Run tests
-        run: make test || cat /github/home/.cache/pre-commit/pre-commit.log
+        run: make test
       - name: Terraform plan
         run: make plan
 
