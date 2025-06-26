@@ -11,7 +11,7 @@ env:
 
 jobs:
   plan:
-    runs-on: arc
+    runs-on: arc-dind
     container: image-registry.openshift-image-registry.svc:5000/arc-runners/terraform-runner:latest
 
     steps:
