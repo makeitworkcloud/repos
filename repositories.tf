@@ -296,6 +296,34 @@ resource "github_actions_secret" "terraform-runner_cloudflare_auth_client_secret
   depends_on      = [github_repository.terraform-runner]
 }
 
+resource "github_actions_secret" "terraform-runner_openshift_server_url" {
+  repository      = github_repository.terraform-runner.name
+  secret_name     = "OPENSHIFT_SERVER_URL"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_server_url"]
+  depends_on      = [github_repository.terraform-runner]
+}
+
+resource "github_actions_secret" "terraform-runner_openshift_username" {
+  repository      = github_repository.terraform-runner.name
+  secret_name     = "OPENSHIFT_USERNAME"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_username"]
+  depends_on      = [github_repository.terraform-runner]
+}
+
+resource "github_actions_secret" "terraform-runner_openshift_password" {
+  repository      = github_repository.terraform-runner.name
+  secret_name     = "OPENSHIFT_PASSWORD"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_password"]
+  depends_on      = [github_repository.terraform-runner]
+}
+
+resource "github_actions_secret" "terraform-runner_openshift_token" {
+  repository      = github_repository.terraform-runner.name
+  secret_name     = "OPENSHIFT_TOKEN"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_token"]
+  depends_on      = [github_repository.terraform-runner]
+}
+
 resource "github_repository" "torwww" {
   name                 = "torwww"
   description          = "Deploy web mirror on local Fedora system using Ansible."
