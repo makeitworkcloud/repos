@@ -9,6 +9,12 @@ resource "github_repository" "dotgithub" {
   vulnerability_alerts = true
 }
 
+resource "github_repository_topics" "dotgithub" {
+  repository = github_repository.dotgithub.name
+  topics     = ["github"]
+  depends_on = [github_repository.dotgithub]
+}
+
 resource "github_repository" "ansible-crc" {
   name                 = "ansible-crc"
   description          = "Ansible role to deploy OpenShift Local (CRC) with a custom domain name and external API access."
