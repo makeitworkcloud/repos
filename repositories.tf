@@ -282,6 +282,20 @@ resource "github_repository_topics" "terraform-runner" {
   depends_on = [github_repository.terraform-runner]
 }
 
+resource "github_actions_secret" "terraform-runner_cloudflare_auth_client_id" {
+  repository      = github_repository.terraform-runner.name
+  secret_name     = "CLOUDFLARE_AUTH_CLIENT_ID"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_auth_client_id"]
+  depends_on      = [github_repository.terraform-runner]
+}
+
+resource "github_actions_secret" "terraform-runner_cloudflare_auth_client_secret" {
+  repository      = github_repository.terraform-runner.name
+  secret_name     = "CLOUDFLARE_AUTH_CLIENT_SECRET"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_auth_client_secret"]
+  depends_on      = [github_repository.terraform-runner]
+}
+
 resource "github_repository" "torwww" {
   name                 = "torwww"
   description          = "Deploy web mirror on local Fedora system using Ansible."
