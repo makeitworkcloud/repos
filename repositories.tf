@@ -74,7 +74,7 @@ resource "github_repository" "cflan" {
 resource "github_repository_topics" "cflan" {
   repository = github_repository.cflan.name
   topics     = ["python", "cloudflare", "networkmanager", "dns", "networking"]
-  depends_on = [github_repository.cluster]
+  depends_on = [github_repository.cflan]
 }
 
 resource "github_repository" "cluster" {
@@ -92,6 +92,49 @@ resource "github_repository_topics" "cluster" {
   repository = github_repository.cluster.name
   topics     = ["terraform", "openshift", "argocd", "kustomize", "kubernetes"]
   depends_on = [github_repository.cluster]
+}
+
+resource "github_actions_secret" "cluster_cloudflare_auth_client_id" {
+  repository      = github_repository.cluster.name
+  secret_name     = "CLOUDFLARE_AUTH_CLIENT_ID"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_auth_client_id"]
+  depends_on      = [github_repository.cluster]
+}
+
+resource "github_actions_secret" "cluster_cloudflare_auth_client_secret" {
+  repository      = github_repository.cluster.name
+  secret_name     = "CLOUDFLARE_AUTH_CLIENT_SECRET"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_auth_client_secret"]
+  depends_on      = [github_repository.cluster]
+}
+
+
+resource "github_actions_secret" "cluster_openshift_server_url" {
+  repository      = github_repository.cluster.name
+  secret_name     = "OPENSHIFT_SERVER_URL"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_server_url"]
+  depends_on      = [github_repository.cluster]
+}
+
+resource "github_actions_secret" "cluster_openshift_username" {
+  repository      = github_repository.cluster.name
+  secret_name     = "OPENSHIFT_USERNAME"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_username"]
+  depends_on      = [github_repository.cluster]
+}
+
+resource "github_actions_secret" "cluster_openshift_password" {
+  repository      = github_repository.cluster.name
+  secret_name     = "OPENSHIFT_PASSWORD"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_password"]
+  depends_on      = [github_repository.cluster]
+}
+
+resource "github_actions_secret" "cluster_openshift_token" {
+  repository      = github_repository.cluster.name
+  secret_name     = "OPENSHIFT_TOKEN"
+  plaintext_value = data.sops_file.secret_vars.data["openshift_token"]
+  depends_on      = [github_repository.cluster]
 }
 
 resource "github_repository" "onion" {

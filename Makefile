@@ -1,10 +1,10 @@
-SHELL := /bin/bash
-OPENSHIFT := $(shell which oc)
-TERRAFORM := $(shell which terraform)
-OPENSHIFT_API_URL := $(shell sops decrypt secrets/secrets.yaml | grep cluster_host | cut -d ' ' -f 2)
-OPENSHIFT_TF_NAMESPACE := $(shell sops decrypt secrets/secrets.yaml | grep tf_namespace | cut -d ' ' -f 2)
-CONTEXT := $(shell ${OPENSHIFT} config current-context 2>/dev/null)
-DESIRED_CONTEXT := $(shell sops decrypt secrets/secrets.yaml | grep desired_context | cut -d ' ' -f 2)
+SHELL         := /bin/bash
+TERRAFORM     := $(shell which terraform)
+S3_REGION     := $(shell sops decrypt secrets/secrets.yaml | grep ^s3_region     | cut -d ' ' -f 2)
+S3_BUCKET     := $(shell sops decrypt secrets/secrets.yaml | grep ^s3_bucket     | cut -d ' ' -f 2)
+S3_KEY        := $(shell sops decrypt secrets/secrets.yaml | grep ^s3_key        | cut -d ' ' -f 2)
+S3_ACCESS_KEY := $(shell sops decrypt secrets/secrets.yaml | grep ^s3_access_key | cut -d ' ' -f 2)
+S3_SECRET_KEY := $(shell sops decrypt secrets/secrets.yaml | grep ^s3_secret_key | cut -d ' ' -f 2)
 
 .PHONY: help init plan apply test pre-commit-check-deps pre-commit-install-hooks argcd-login
 
@@ -33,11 +33,10 @@ help:
 clean:
 	@find . -name .terraform -type d | xargs -I {} rm -rf {}
 
-init: check-context clean .terraform/terraform.tfstate
+init: clean .terraform/terraform.tfstate
 
 .terraform/terraform.tfstate:
-	@${OPENSHIFT} get project ${OPENSHIFT_TF_NAMESPACE} > /dev/null 2>&1 || ${OPENSHIFT} new-project ${OPENSHIFT_TF_NAMESPACE}
-	@${TERRAFORM} init -reconfigure -upgrade -input=false -backend-config="host=https://${OPENSHIFT_API_URL}" -backend-config="namespace=${OPENSHIFT_TF_NAMESPACE}"
+	@${TERRAFORM} init -reconfigure -upgrade -input=false -backend-config="key=${S3_KEY}" -backend-config="bucket=${S3_BUCKET}" -backend-config="region=${S3_REGION}" -backend-config="access_key=${S3_ACCESS_KEY}" -backend-config="secret_key=${S3_SECRET_KEY}"
 
 plan: init .terraform/plan
 
@@ -48,7 +47,7 @@ apply: test plan
 	@${TERRAFORM} apply -auto-approve -compact-warnings .terraform/plan
 	@rm -f .terraform/plan
 
-test: check-context .git/hooks/pre-commit
+test: .git/hooks/pre-commit
 	@pre-commit run -a
 
 DEPS_PRE_COMMIT=$(shell which pre-commit || echo "pre-commit not found")
@@ -70,5 +69,3 @@ pre-commit-install-hooks: .git/hooks/pre-commit
 .git/hooks/pre-commit: pre-commit-check-deps
 	@pre-commit install --install-hooks
 
-check-context:
-	@ if [[ "${CONTEXT}" == *"${DESIRED_CONTEXT}"* ]]; then echo "Context check passed"; else echo "Context check failed" && exit 1; fi
