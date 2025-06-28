@@ -1,4 +1,4 @@
 resource "github_membership" "admin" {
-  username = "welchworks"
+  username = "xnoto"
   role     = "admin"
 }
