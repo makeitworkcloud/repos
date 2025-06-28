@@ -1,3 +1,14 @@
+resource "github_repository" "dotgithub" {
+  name                 = ".github"
+  description          = "Make IT Work GitHub Organization Info"
+  homepage_url         = "https://github.com/makeitworkcloud/"
+  has_downloads        = false
+  has_issues           = false
+  has_projects         = false
+  has_wiki             = false
+  vulnerability_alerts = true
+}
+
 resource "github_repository" "ansible-crc" {
   name                 = "ansible-crc"
   description          = "Ansible role to deploy OpenShift Local (CRC) with a custom domain name and external API access."
