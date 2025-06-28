@@ -32,17 +32,31 @@ resource "github_repository_topics" "ansible-crc" {
   depends_on = [github_repository.ansible-crc]
 }
 
-resource "github_actions_secret" "ansible_sops_age_key" {
+resource "github_actions_secret" "ansible-crc_sops_age_key" {
   repository      = github_repository.ansible-crc.name
   secret_name     = "SOPS_AGE_KEY"
   plaintext_value = data.sops_file.secret_vars.data["sops_age_key"]
   depends_on      = [github_repository.ansible-crc]
 }
 
-resource "github_actions_secret" "ansible_ssh_private_key" {
+resource "github_actions_secret" "ansible-crc_ssh_private_key" {
   repository      = github_repository.ansible-crc.name
   secret_name     = "SSH_PRIVATE_KEY"
   plaintext_value = data.sops_file.secret_vars.data["ansible_ssh_private_key"]
+  depends_on      = [github_repository.ansible-crc]
+}
+
+resource "github_actions_secret" "ansible-crc_cloudflare_auth_client_id" {
+  repository      = github_repository.ansible-crc.name
+  secret_name     = "CLOUDFLARE_AUTH_CLIENT_ID"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_auth_client_id"]
+  depends_on      = [github_repository.ansible-crc]
+}
+
+resource "github_actions_secret" "ansible-crc_cloudflare_auth_client_secret" {
+  repository      = github_repository.ansible-crc.name
+  secret_name     = "CLOUDFLARE_AUTH_CLIENT_SECRET"
+  plaintext_value = data.sops_file.secret_vars.data["cloudflare_auth_client_secret"]
   depends_on      = [github_repository.ansible-crc]
 }
 
