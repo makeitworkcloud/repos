@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Run Git as root
+        run: git config --global --add safe.directory '*'
+
       - name: Login to OpenShift
         uses: redhat-actions/oc-login@v1
         with:
@@ -25,4 +28,4 @@ jobs:
           insecure_skip_tls_verify: true
 
       - name: Terraform apply
-        run: make apply || ( cat /github/home/.cache/pre-commit/pre-commit.log && exit 1 )
+        run: make apply
