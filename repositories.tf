@@ -155,6 +155,13 @@ resource "github_actions_secret" "libvirt_ssh_private_key" {
   depends_on      = [github_repository.libvirt]
 }
 
+resource "github_actions_secret" "libvirt_ssh_known_hosts" {
+  repository      = github_repository.libvirt.name
+  secret_name     = "SSH_KNOWN_HOSTS"
+  plaintext_value = data.sops_file.secret_vars.data["ssh_known_hosts"]
+  depends_on      = [github_repository.libvirt]
+}
+
 resource "github_actions_secret" "libvirt_sops_age_key" {
   repository      = github_repository.libvirt.name
   secret_name     = "SOPS_AGE_KEY"
