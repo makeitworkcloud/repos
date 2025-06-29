@@ -42,7 +42,7 @@ resource "github_actions_secret" "ansible-crc_sops_age_key" {
 resource "github_actions_secret" "ansible-crc_ssh_private_key" {
   repository      = github_repository.ansible-crc.name
   secret_name     = "SSH_PRIVATE_KEY"
-  plaintext_value = data.sops_file.secret_vars.data["ansible_ssh_private_key"]
+  plaintext_value = data.sops_file.secret_vars.data["ssh_private_key"]
   depends_on      = [github_repository.ansible-crc]
 }
 
@@ -135,6 +135,31 @@ resource "github_actions_secret" "cluster_openshift_token" {
   secret_name     = "OPENSHIFT_TOKEN"
   plaintext_value = data.sops_file.secret_vars.data["openshift_token"]
   depends_on      = [github_repository.cluster]
+}
+
+resource "github_repository" "libvirt" {
+  name                 = "libvirt"
+  description          = "Terraform management of libvirt hypervisor"
+  homepage_url         = "https://makeitwork.cloud"
+  has_downloads        = true
+  has_issues           = true
+  has_projects         = true
+  has_wiki             = true
+  vulnerability_alerts = true
+}
+
+resource "github_actions_secret" "libvirt_ssh_private_key" {
+  repository      = github_repository.libvirt.name
+  secret_name     = "SSH_PRIVATE_KEY"
+  plaintext_value = data.sops_file.secret_vars.data["ssh_private_key"]
+  depends_on      = [github_repository.libvirt]
+}
+
+resource "github_actions_secret" "libvirt_sops_age_key" {
+  repository      = github_repository.libvirt.name
+  secret_name     = "SOPS_AGE_KEY"
+  plaintext_value = data.sops_file.secret_vars.data["sops_age_key"]
+  depends_on      = [github_repository.libvirt]
 }
 
 resource "github_repository" "onion" {
