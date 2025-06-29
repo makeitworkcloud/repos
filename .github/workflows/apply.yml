@@ -25,4 +25,4 @@ jobs:
           insecure_skip_tls_verify: true
 
       - name: Terraform apply
-        run: make apply
+        run: make apply || ( cat /github/home/.cache/pre-commit/pre-commit.log && exit 1 )
