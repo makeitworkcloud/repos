@@ -70,6 +70,7 @@ No modules.
 | [github_repository_topics.cflan](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_repository_topics.cluster](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_repository_topics.dotgithub](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
+| [github_repository_topics.libvirt](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_repository_topics.onion](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_repository_topics.repos](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |
 | [github_repository_topics.shelldefaults](https://registry.terraform.io/providers/integrations/github/latest/docs/resources/repository_topics) | resource |

@@ -148,6 +148,12 @@ resource "github_repository" "libvirt" {
   vulnerability_alerts = true
 }
 
+resource "github_repository_topics" "libvirt" {
+  repository = github_repository.libvirt.name
+  topics     = ["libvirt", "terraform"]
+  depends_on = [github_repository.libvirt]
+}
+
 resource "github_actions_secret" "libvirt_ssh_private_key" {
   repository      = github_repository.libvirt.name
   secret_name     = "SSH_PRIVATE_KEY"
