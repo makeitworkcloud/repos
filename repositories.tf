@@ -108,7 +108,6 @@ resource "github_actions_secret" "cluster_cloudflare_auth_client_secret" {
   depends_on      = [github_repository.cluster]
 }
 
-
 resource "github_actions_secret" "cluster_openshift_server_url" {
   repository      = github_repository.cluster.name
   secret_name     = "OPENSHIFT_SERVER_URL"
@@ -134,6 +133,13 @@ resource "github_actions_secret" "cluster_openshift_token" {
   repository      = github_repository.cluster.name
   secret_name     = "OPENSHIFT_TOKEN"
   plaintext_value = data.sops_file.secret_vars.data["openshift_token"]
+  depends_on      = [github_repository.cluster]
+}
+
+resource "github_actions_secret" "cluster_sops_age_key" {
+  repository      = github_repository.cluster.name
+  secret_name     = "SOPS_AGE_KEY"
+  plaintext_value = data.sops_file.secret_vars.data["sops_age_key"]
   depends_on      = [github_repository.cluster]
 }
 
