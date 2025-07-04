@@ -1,5 +1,5 @@
 ---
-name: Apply - Terraform via ARC
+name: Apply
 on:
   push:
     branches:
@@ -18,14 +18,6 @@ jobs:
 
       - name: Run Git as root
         run: git config --global --add safe.directory '*'
-
-      - name: Login to OpenShift
-        uses: redhat-actions/oc-login@v1
-        with:
-          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
-          openshift_username: ${{ secrets.OPENSHIFT_USERNAME }}
-          openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
-          insecure_skip_tls_verify: true
 
       - name: Terraform apply
         run: make apply

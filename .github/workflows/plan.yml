@@ -1,5 +1,5 @@
 ---
-name: Plan - Terraform via ARC
+name: Plan
 
 on:
   pull_request:
@@ -20,15 +20,8 @@ jobs:
       - name: Run Git as root
         run: git config --global --add safe.directory '*'
 
-      - name: Login to OpenShift
-        uses: redhat-actions/oc-login@v1
-        with:
-          openshift_server_url: ${{ secrets.OPENSHIFT_SERVER_URL }}
-          openshift_username: ${{ secrets.OPENSHIFT_USERNAME }}
-          openshift_password: ${{ secrets.OPENSHIFT_PASSWORD }}
-          insecure_skip_tls_verify: true
-
       - name: Run tests
         run: make test
+
       - name: Terraform plan
         run: make plan
