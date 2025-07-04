@@ -28,7 +28,7 @@ resource "github_repository" "ansible-crc" {
 
 resource "github_repository_topics" "ansible-crc" {
   repository = github_repository.ansible-crc.name
-  topics     = ["ansible", "openshift", "crc", "kubernetes", "ansible-playbook", "ansible-role", "openshift-local"]
+  topics     = ["ansible", "openshift", "crc", "kubernetes", "ansible-role", "openshift-local"]
   depends_on = [github_repository.ansible-crc]
 }
 
@@ -79,7 +79,7 @@ resource "github_repository_topics" "cflan" {
 
 resource "github_repository" "cluster" {
   name                 = "cluster"
-  description          = "Terraform & Argo CD management of OpenShift cluster."
+  description          = "OpenShift cluster management repo"
   homepage_url         = "https://makeitwork.cloud"
   has_downloads        = true
   has_issues           = true
@@ -90,7 +90,7 @@ resource "github_repository" "cluster" {
 
 resource "github_repository_topics" "cluster" {
   repository = github_repository.cluster.name
-  topics     = ["terraform", "openshift", "argocd", "kustomize", "kubernetes"]
+  topics     = ["terraform", "openshift", "ansible", "argocd", "kustomize", "kubernetes"]
   depends_on = [github_repository.cluster]
 }
 
