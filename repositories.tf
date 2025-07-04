@@ -32,6 +32,23 @@ resource "github_repository_topics" "ansible-crc" {
   depends_on = [github_repository.ansible-crc]
 }
 
+resource "github_repository" "ansible-ksops" {
+  name                 = "ansible-ksops"
+  description          = "Ansible role to deploy OpenShift GitOps + KSOPS"
+  homepage_url         = "https://makeitwork.cloud"
+  has_downloads        = true
+  has_issues           = true
+  has_projects         = true
+  has_wiki             = true
+  vulnerability_alerts = true
+}
+
+resource "github_repository_topics" "ansible-ksops" {
+  repository = github_repository.ansible-ksops.name
+  topics     = ["ansible", "openshift", "ksops", "gitops", "kubernetes", "ansible-role", "openshift-local"]
+  depends_on = [github_repository.ansible-ksops]
+}
+
 resource "github_repository" "cflan" {
   name                 = "cflan"
   description          = "Python scripts for updating Cloudflare DNS entries via NetworkManager-dispatcher."
