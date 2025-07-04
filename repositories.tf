@@ -146,6 +146,20 @@ resource "github_actions_secret" "cluster_ssh_known_hosts" {
   depends_on      = [github_repository.cluster]
 }
 
+resource "github_actions_secret" "cluster_ssh_user" {
+  repository      = github_repository.cluster.name
+  secret_name     = "SSH_USER"
+  plaintext_value = data.sops_file.secret_vars.data["cluster_ssh_user"]
+  depends_on      = [github_repository.cluster]
+}
+
+resource "github_actions_secret" "cluster_ssh_host" {
+  repository      = github_repository.cluster.name
+  secret_name     = "SSH_HOST"
+  plaintext_value = data.sops_file.secret_vars.data["cluster_ssh_host"]
+  depends_on      = [github_repository.cluster]
+}
+
 resource "github_repository" "libvirt" {
   name                 = "libvirt"
   description          = "Terraform management of libvirt hypervisor"
