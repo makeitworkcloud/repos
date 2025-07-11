@@ -11,7 +11,7 @@ env:
 jobs:
   deploy:
     runs-on: arc-dind
-    container: ghcr.io/makeitworkcloud/terraform-runner:latest
+    container: registry.docker-registry.svc:5000/makeitworkcloud/terraform-runner:latest
 
     steps:
       - uses: actions/checkout@v4
